@@ -34,6 +34,15 @@ services:
   #   depends_on:
   #     - db
 
+  admin_backend:
+    image: mpogonaru/idp_evp_admin-backend:v1
+    networks:
+      - admin
+    deploy:
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+
   db:
     image: mpogonaru/idp_evp_db:v1
     # command: --default-authentication-plugin=mysql_native_password

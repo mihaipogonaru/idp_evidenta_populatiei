@@ -2,7 +2,6 @@
 Flask-WTF==0.14.2
 WTForms==2.1
 
-# Assets
 # Flask
 Flask==1.0.2
 MarkupSafe==1.0
