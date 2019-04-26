@@ -19,10 +19,12 @@ counties = {
     'Arad': ('Arad', 46.1036, 21.184, 7.7),
     'Prahova': ('Ploiesti', 44.5138, 24.524, 4.7),
     'Sibiu': ('Sibiu', 45.4745, 24.98, 5.4),
-    'Bacău': ('Bacau', 46.35, 26.55, 6.6)
+    'Bacau': ('Bacau', 46.35, 26.55, 6.6)
 }
 
 def insert_test_countries():
+    print("GEHEHE")
+
     for county, (city, lat, longi, rad) in counties.items():
         Database.insert_county(county, lat, longi, rad)
         Database.insert_city(city, lat, longi, rad / 10, county)

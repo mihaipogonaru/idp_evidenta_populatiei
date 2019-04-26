@@ -41,7 +41,22 @@ services:
     deploy:
       restart_policy:
         condition: on-failure
-        max_attempts: 3
+        max_attempts: 5
+    depends_on:
+      - db
+
+  client:
+    image: mpogonaru/idp_evp_clent:v1
+    ports:
+        - "8888:8888"
+    networks:
+      - frontend
+    deploy:
+      restart_policy:
+        condition: on-failure
+        max_attempts: 5
+    depends_on:
+      - db
 
   db:
     image: mpogonaru/idp_evp_db:v1

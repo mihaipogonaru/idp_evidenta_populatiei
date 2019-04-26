@@ -14,9 +14,10 @@ months_b = [1, 5, 7, 9, 11]
 months_d = [2, 3, 6, 9, 12]
 
 now = datetime.now()
-pin = 0
 
-def inser_test_data():
+def insert_test_data():
+    pin = 0
+    
     for _, (city, _, _, _) in counties.items():
         for i in range(5):
             surname = "{}{}".format(surnames[i % 2], i)
@@ -44,5 +45,5 @@ def inser_test_data():
             pin += 1
 
 if __name__ == '__main__':
-    inser_test_data()
+    insert_test_data()
     
