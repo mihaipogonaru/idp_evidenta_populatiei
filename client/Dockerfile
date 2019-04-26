@@ -10,4 +10,3 @@ COPY start.py /usr/src/client/
 
 EXPOSE 8888
 CMD ["python", "/usr/src/client/start.py"]
-

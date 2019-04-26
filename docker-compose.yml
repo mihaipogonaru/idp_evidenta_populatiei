@@ -1,0 +1,75 @@
+version: '3'
+
+services:
+  # client:
+  #   image: python:3
+  #   volumes:
+  #     - ./client:/app
+  #   command: python /app/app.py
+  #   restart: on-failure
+  #   stdin_open: true
+  #   tty: true
+  #   depends_on:
+  #     - client_service
+
+  # admin_service:
+  #   image: python:3
+  #   volumes:
+  #     - ./service/admin_service:/app
+  #   command: bash -c "pip install --no-cache-dir -r /app/requirements.txt && python /app/app.py"
+  #   restart: on-failure
+  #   stdin_open: true
+  #   tty: true
+  #   depends_on:
+  #     - db
+
+  # client_service:
+  #   image: python:3
+  #   volumes:
+  #     - ./service/client_service:/app
+  #   command: bash -c "pip install --no-cache-dir -r /app/requirements.txt && python /app/app.py"
+  #   restart: on-failure
+  #   stdin_open: true
+  #   tty: true
+  #   depends_on:
+  #     - db
+
+  db:
+    image: mpogonaru/idp_evp_db:v1
+    # command: --default-authentication-plugin=mysql_native_password
+    
+    # it would be better if we had just one network to the db and only
+    # one service communicating with the db -> no duplicate code
+    networks:
+      - frontend
+      - admin
+    volumes:
+      - "db-data:/var/lib/mysql"
+    environment:
+      - MYSQL_ROOT_PASSWORD=1
+      - MYSQL_DATABASE=idp
+    deploy:
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+
+  visualizer:
+    image: dockersamples/visualizer:stable
+    ports:
+      - "9000:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    stop_grace_period: 30s
+    deploy:
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+      placement:
+        constraints:
+          - node.role == manager
+
+networks:
+  frontend:
+  admin:
+volumes:
+  db-data:
