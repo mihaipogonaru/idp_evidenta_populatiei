@@ -28,7 +28,7 @@ def insert_test_counties():
             Database.insert_county(county, lat, longi, rad)
             Database.insert_city(city, lat, longi, rad / 10, county)
         except Exception as e:
-            print(e):
+            print(e)
             continue
 
 if __name__ == '__main__':
