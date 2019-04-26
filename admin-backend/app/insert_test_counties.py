@@ -23,11 +23,12 @@ counties = {
 }
 
 def insert_test_countries():
-    print("GEHEHE")
-
     for county, (city, lat, longi, rad) in counties.items():
-        Database.insert_county(county, lat, longi, rad)
-        Database.insert_city(city, lat, longi, rad / 10, county)
+        try:
+            Database.insert_county(county, lat, longi, rad)
+            Database.insert_city(city, lat, longi, rad / 10, county)
+        except:
+            continue
 
 if __name__ == '__main__':
     insert_test_countries()

@@ -39,10 +39,13 @@ def insert_test_data():
                 except:
                     date_d = date_d.replace(day=date_d.day-1)
 
-            Database.insert_birth(pin, surname, name, date_b, city)
-            Database.insert_death(pin, date_d, city)
-
-            pin += 1
+            try:
+                Database.insert_birth(pin, surname, name, date_b, city)
+                Database.insert_death(pin, date_d, city)
+            except:
+                continue
+            finally:
+                pin += 1
 
 if __name__ == '__main__':
     insert_test_data()
