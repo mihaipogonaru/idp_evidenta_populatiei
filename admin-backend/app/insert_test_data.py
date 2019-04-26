@@ -42,11 +42,14 @@ def insert_test_data():
             try:
                 Database.insert_birth(pin, surname, name, date_b, city)
                 Database.insert_death(pin, date_d, city)
-            except:
+            except Exception as e:
+                print(e)
                 continue
             finally:
                 pin += 1
 
 if __name__ == '__main__':
+    print("adding data")
     insert_test_data()
+    print("done adding data")
     
