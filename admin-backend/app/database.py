@@ -1,6 +1,6 @@
 import MySQLdb
 
-from config import DBConfig
+from app.config import DBConfig
 
 class Database:
     db = MySQLdb.connect(host=DBConfig.db_server, port=DBConfig.db_port,

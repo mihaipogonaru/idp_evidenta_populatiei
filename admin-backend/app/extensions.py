@@ -2,4 +2,4 @@
 in app.py
 """
 
-from .database import Database as db
+from app.database import Database as db

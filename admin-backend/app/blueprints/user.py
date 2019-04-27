@@ -1,9 +1,10 @@
 from flask import Blueprint, request, jsonify
-from ..extensions import db
+
+from app.extensions import db
 
 blueprint = Blueprint("user", __name__, url_prefix='/user')
 
-@blueprint.route("/add/<string:email>", methods=['post'])
+@blueprint.route("/add/<string:email>/", methods=['post'])
 def add(email: str):
     req = request.get_json(silent=True)
     if not req:
@@ -20,7 +21,7 @@ def add(email: str):
     return jsonify({"msg": "User added successfully"})    
 
 
-@blueprint.route("/view/<string:email>", methods=['get'])
+@blueprint.route("/view/<string:email>/", methods=['get'])
 def view(email: str):
     resp = {"error": "No error message"}
 
@@ -35,21 +36,19 @@ def view(email: str):
     return jsonify(resp) 
 
 
-@blueprint.route("/viewall", methods=['get'])
+@blueprint.route("/viewall/", methods=['get'])
 def viewall():
     return jsonify(db.get_users())
 
 
-@blueprint.route("/remove/<email:name>", methods=['post'])
-def delete(email: str):
+@blueprint.route("/remove/<string:email>/", methods=['post'])
+def remove(email: str):
     resp = {"error": "No error message"}
 
     try:
-        resp = db.delete_user(email)
+        db.delete_user(email)
+        resp = {"msg": "User removed successfully"}
     except Exception as e:
         resp = {"error": str(e)}
-
-    if not resp:
-        resp = {"error": "User not found"}
 
     return jsonify(resp) 

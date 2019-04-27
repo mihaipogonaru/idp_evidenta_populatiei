@@ -1,10 +1,10 @@
 from flask import Flask, jsonify
 
-from config import Config
-from extensions import (
+from app.config import Config
+from app.extensions import (
     db
 )
-from blueprints import city_bp, county_bp, user_bp
+from app.blueprints import city_bp, county_bp, user_bp
 
 def create_app(config_object=Config):
     """An application factory, as explained here:
@@ -33,7 +33,6 @@ def register_error_handlers(app):
 
         return jsonify(resp)
     for errcode in [401, 404, 500]:
-        app.errorhandler(errcode)(render_error)
+        app.errorhandler(render_error)
 
 app = create_app()
-app.run()
