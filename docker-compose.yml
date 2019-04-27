@@ -1,40 +1,20 @@
 version: '3'
 
 services:
-  # client:
-  #   image: python:3
-  #   volumes:
-  #     - ./client:/app
-  #   command: python /app/app.py
-  #   restart: on-failure
-  #   stdin_open: true
-  #   tty: true
-  #   depends_on:
-  #     - client_service
+  admin:
+    image: mpogonaru/idp_evp_admin:v1
+    ports:
+        - "9900:9900"
+    networks:
+      - admin
+    deploy:
+      restart_policy:
+        condition: on-failure
+        max_attempts: 5
+    depends_on:
+      - admin-backend
 
-  # admin_service:
-  #   image: python:3
-  #   volumes:
-  #     - ./service/admin_service:/app
-  #   command: bash -c "pip install --no-cache-dir -r /app/requirements.txt && python /app/app.py"
-  #   restart: on-failure
-  #   stdin_open: true
-  #   tty: true
-  #   depends_on:
-  #     - db
-
-  # client_service:
-  #   image: python:3
-  #   volumes:
-  #     - ./service/client_service:/app
-  #   command: bash -c "pip install --no-cache-dir -r /app/requirements.txt && python /app/app.py"
-  #   restart: on-failure
-  #   stdin_open: true
-  #   tty: true
-  #   depends_on:
-  #     - db
-
-  admin_backend:
+  admin-backend:
     image: mpogonaru/idp_evp_admin-backend
     networks:
       - admin

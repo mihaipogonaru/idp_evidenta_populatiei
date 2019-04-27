@@ -5,9 +5,9 @@ from wtforms import IntegerField, StringField, PasswordField, BooleanField, Hidd
 from wtforms.validators import DataRequired, Email, EqualTo, Length
 from wtforms.fields.html5 import DateField
 
-from .messages import LoginValidationMessages
-from .extensions import db
-from .models import User
+from app.messages import LoginValidationMessages
+from app.extensions import db
+from app.models import User
 
 class LoginForm(FlaskForm):
     username = StringField('Username (your e-mail)',
