@@ -35,7 +35,7 @@ services:
   #     - db
 
   admin_backend:
-    image: mpogonaru/idp_evp_admin-backend:v1
+    image: mpogonaru/idp_evp_admin-backend
     networks:
       - admin
     deploy:
@@ -46,7 +46,7 @@ services:
       - db
 
   client:
-    image: mpogonaru/idp_evp_clent:v1
+    image: mpogonaru/idp_evp_client
     ports:
         - "8888:8888"
     networks:
@@ -59,7 +59,7 @@ services:
       - db
 
   db:
-    image: mpogonaru/idp_evp_db:v1
+    image: mpogonaru/idp_evp_db
     # command: --default-authentication-plugin=mysql_native_password
     
     # it would be better if we had just one network to the db and only
