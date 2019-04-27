@@ -1,7 +1,5 @@
 from flask_login import UserMixin
 
-from hashlib import sha224
-
 class User(UserMixin):
     def __init__(self, user_dict):
         if not user_dict:
