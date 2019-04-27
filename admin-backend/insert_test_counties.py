@@ -1,7 +1,7 @@
 import sys
 import os
 
-from database import Database
+from app.database import Database
 
 counties = {
     'Alba': ('Alba Iulia', 46.0718, 23.5730, 6.2),

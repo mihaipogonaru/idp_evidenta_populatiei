@@ -1,7 +1,7 @@
 import sys
 import os
 
-from database import Database
+from app.database import Database
 
 from datetime import datetime
 from insert_test_counties import counties
