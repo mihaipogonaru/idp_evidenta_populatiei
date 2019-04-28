@@ -16,8 +16,6 @@ services:
 
   admin-backend:
     image: mpogonaru/idp_evp_admin-backend
-    ports:
-        - "9901:9901"
     networks:
       - admin
     deploy:
