@@ -92,8 +92,8 @@ class DeathForm(FlaskForm):
         if db.call_no_throw(db.insert_death, person=self.pin1.data,
                 city=self.city1.data, date=self.dt1.data) == db.err:
             
-            self.pin.errors.append('Invalid pin or city')
-            self.city.errors.append('Invalid pin or city')
+            self.pin1.errors.append('Invalid pin or city')
+            self.city1.errors.append('Invalid pin or city')
             return False
 
         return True
