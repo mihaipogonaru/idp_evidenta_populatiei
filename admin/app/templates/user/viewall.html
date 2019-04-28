@@ -6,12 +6,14 @@
     <div class="mdl-cell mdl-cell--4-col">
     <h1><strong>USERS</strong></h1>
     <br/>
-    {{ render_dict(users) }}
-    <br/>
+    {% for user in users %}
+        {{ render_dict(user) }}
+    {% endfor %}
+    <br/><br/>
+    <a href="{{ url_for('user.add') }}"><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="button"> Add User </button></a>
+    <br/><br/>
+    <a href="{{ url_for('user.remove') }}"><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="button"> Remove User </button></a>
     </div>
-    <a class="mdl-navigation__link" href="{{ url_for('user.add') }}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation"></i>Add User</a>
-    <br/>
-    <a class="mdl-navigation__link" href="{{ url_for('user.remove') }}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation"></i>Remove User</a>
     <div class="mdl-layout-spacer"></div>
 </div>
 {% endblock %}

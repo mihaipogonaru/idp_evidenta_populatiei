@@ -12,7 +12,8 @@ class AddUser(FlaskForm):
     username = StringField('Username (user e-mail)',
                            validators=[DataRequired(ValidationMessages.data_required),
                                        Email(ValidationMessages.email_format)])
-    password = PasswordField('Password')
+    password = PasswordField('Password',
+                           validators=[DataRequired(ValidationMessages.data_required)])
 
     def __init__(self, *args, **kwargs):
         super(AddUser, self).__init__(*args, **kwargs)

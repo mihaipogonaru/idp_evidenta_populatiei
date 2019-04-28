@@ -9,6 +9,11 @@ class Database:
     err = 'err'
 
     @staticmethod
+    def set_session_read_commited():
+        Database.cursor.execute('SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED;')
+        Database.db.commit()
+
+    @staticmethod
     def call_no_throw(method, *args, **kwargs):
         try:
             return method(*args, **kwargs)

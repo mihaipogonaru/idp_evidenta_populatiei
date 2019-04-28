@@ -10,20 +10,20 @@ class AdminBackend:
         ret = {}
 
         try:
-            resp = requests.get("{}/{}".format(backend_url, resource))
-        except requests.ConnectionError:
+            resp = requests.get("http://{}/{}/".format(backend_url, resource))
+        except:
             ret["error"] = "Error connecting to admin backend"
             return ret
 
         try:
-            data = resp.get_json()
+            data = resp.json()
         except:
-            data = resp.text
+            data = {resp.text: ""} #TODO better pls
 
         if resp.status_code != 200:
-            ret["error"] = data["error"] if "error" in data else "Unspecified"
+            ret["error"] = data["error"] if "error" in data else data
         else:
-            ret["msg"] = data["msg"] if "msg" in data else "Success"
+            ret = data["msg"] if "msg" in data else data
 
         return ret
 
@@ -33,20 +33,20 @@ class AdminBackend:
         ret = {}
 
         try:
-            resp = requests.post("{}/{}".format(backend_url, resource), json=json_to_send)
-        except requests.ConnectionError:
+            resp = requests.post("http://{}/{}/".format(backend_url, resource), json=json_to_send)
+        except:
             ret["error"] = "Error connecting to admin backend"
             return ret
 
         try:
-            data = resp.get_json()
+            data = resp.json()
         except:
-            data = resp.text
+            data = {resp.text: ""} #TODO better pls
 
         if resp.status_code != 200:
             ret["error"] = data["error"] if "error" in data else data
         else:
-            ret["msg"] = data["msg"] if "msg" in data else data
+            ret = data["msg"] if "msg" in data else data
 
         return ret
 

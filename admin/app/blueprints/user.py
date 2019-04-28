@@ -8,7 +8,7 @@ blueprint = Blueprint("user", __name__, url_prefix='/user')
 @blueprint.route("/add/", methods=['get'])
 def add():
     form = AddUser()
-    return render_template(url_for('user/add.html'), form=form)
+    return render_template('user/add.html', form=form)
 
 @blueprint.route("/add/", methods=['post'])
 def add_post():
@@ -27,6 +27,9 @@ def viewall():
     if "error" in users_details:
         flash(users_details['error'])
         return render_template('user/viewall.html', users={})
+
+    if not isinstance(users_details, list):
+        users_details = [users_details]
 
     return render_template('user/viewall.html', users=users_details)
 
